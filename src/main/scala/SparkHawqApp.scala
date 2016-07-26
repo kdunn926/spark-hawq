@@ -19,7 +19,7 @@ object SparkHawqApp {
     val hadoopConf1 = SparkHadoopUtil.get.newConfiguration();
 
     // Tell HAWQInputFormat where the HAWQ master is, which user to use, the schema, and the table
-    HAWQInputFormat.setInput(hadoopConf1, "localhost:10432/postgres", "gpadmin", "public", "test")
+    HAWQInputFormat.setInput(hadoopConf1, "sandbox.hortonworks.com:10432/postgres", "gpadmin", "public", "test")
 
     // Create an RDD from the HAWQ table -- _._2 refers to the value (classOf[HAWQRecord]) member of the RDD
     val rdd1 = sc.newAPIHadoopRDD(hadoopConf1, classOf[HAWQInputFormat], classOf[Void], classOf[HAWQRecord]).map(_._2);
