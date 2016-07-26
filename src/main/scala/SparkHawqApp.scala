@@ -2,13 +2,12 @@
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
+import org.apache.spark.deploy.SparkHadoopUtil
+import com.pivotal.hawq.mapreduce.HAWQInputFormat
+import com.pivotal.hawq.mapreduce.HAWQRecord
 
 object SparkHawqApp {
   def main(args: Array[String]) {
-    import com.pivotal.hawq.mapreduce.HAWQInputFormat;
-    import com.pivotal.hawq.mapreduce.HAWQRecord;
-    import com.pivotal.hawq.mapreduce.util.HAWQJdbcUtils;
-    import org.apache.spark.deploy.{LocalSparkCluster, SparkHadoopUtil};
 
     // Set a name for the application
     val conf = new SparkConf().setAppName("Spark HAWQ Application")
