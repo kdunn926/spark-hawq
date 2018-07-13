@@ -18,6 +18,13 @@ custom core-site.xml section:
 </property>
 ```
 
+## Build HAWQ dependencies
+```
+$ git clone https://github.com/apache/incubator-hawq.git
+$ cd incubator-hawq/contrib/hawq-hadoop/
+$ mvn package install -DskipTests
+```
+
 ## Create a fat JAR using Scala Build Tool Assembly
 ```
 $ sbt assembly
@@ -26,6 +33,7 @@ $ sbt assembly
 
 ## Run with Spark on YARN
 ```
-$ spark-submit --class "SparkHawqApp" target/scala-2.10/SparkHawqApp-assembly-1.0.jar --master yarn
+$ spark-submit --class "SparkHawqApp" target/scala-2.11/SparkHawqApp-assembly-1.0.jar --master yarn
 ```
+
 
