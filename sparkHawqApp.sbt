@@ -6,7 +6,7 @@ name := "SparkHawqApp"
 
 version := "1.0"
 
-scalaVersion := "2.10.5"
+scalaVersion := "2.11.6"
 
 resolvers += Resolver.mavenLocal
 
@@ -17,7 +17,7 @@ libraryDependencies += "com.pivotal.hawq" % "hawq-mapreduce-common" % "1.1.0"
 libraryDependencies += "com.pivotal.hawq" % "hawq-mapreduce-parquet" % "1.1.0" 
 libraryDependencies += "com.pivotal.hawq" % "hawq-mapreduce-tool" % "1.1.0" 
 
-mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
+assemblyMergeStrategy in assembly := {
   {
     case PathList("javax", "servlet", xs @ _*)         => MergeStrategy.first
     case PathList(ps @ _*) if ps.last endsWith ".html" => MergeStrategy.first
@@ -29,6 +29,8 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
     case x if x.contains("beanutils") => MergeStrategy.first
     case x if x.contains("netty") => MergeStrategy.first
     case x if x.contains("jboss") => MergeStrategy.first
-    case x => old(x)
+    case x => 
+      val oldStrategy = (assemblyMergeStrategy in assembly).value
+      oldStrategy(x)
   }
 }
